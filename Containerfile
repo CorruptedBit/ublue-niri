@@ -36,6 +36,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     /ctx/build.sh
 
 COPY system_files/ /
+RUN fc-cache -fv
 
 # Homebrew
 COPY --from=ghcr.io/ublue-os/brew:latest /system_files /
@@ -45,6 +46,7 @@ RUN --mount=type=cache,dst=/var/cache \
     /usr/bin/systemctl preset brew-setup.service && \
     /usr/bin/systemctl preset brew-update.timer && \
     /usr/bin/systemctl preset brew-upgrade.timer
+
 
 ### LINTING
 ## Verify final image and contents are correct.
