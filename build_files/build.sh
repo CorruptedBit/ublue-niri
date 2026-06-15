@@ -19,6 +19,7 @@ ln -s /usr/lib/systemd/user/dms.service \
       /etc/systemd/user/niri.service.wants/dms.service
 
 # DMS Greeter (greetd greeter nativo di DMS)
+useradd -r -M -d /var/empty -s /sbin/nologin greeter
 dnf5 -y copr enable avengemedia/danklinux
 dnf5 -y install greetd dms-greeter
 dnf5 -y copr disable avengemedia/danklinux
