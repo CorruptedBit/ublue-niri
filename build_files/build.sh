@@ -50,6 +50,7 @@ EOF
 dnf5 install -y code
 
 # Terra Software
+dnf5 install -y --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release
 dnf5 config-manager setopt terra.enabled=1
 dnf5 install -y zed
 dnf5 config-manager setopt terra.enabled=0
