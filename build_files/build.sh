@@ -9,8 +9,26 @@ set -ouex pipefail
 # List of rpmfusion packages can be found here:
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/43/x86_64/repoview/index.html&protocol=https&redirect=1
 
-# this installs a package from fedora repos
-dnf5 install -y tmux 
+# Graphical Environment
+dnf5 -y copr enable avengemedia/dms
+dnf5 -y install niri dms
+dnf5 -y copr disable avengemedia/dms
+
+mkdir -p /etc/systemd/user/niri.service.wants/
+ln -s /usr/lib/systemd/user/dms.service \
+      /etc/systemd/user/niri.service.wants/dms.service
+
+# DMS Greeter (greetd greeter nativo di DMS)
+dnf5 -y copr enable avengemedia/danklinux
+dnf5 -y install greetd dms-greeter
+dnf5 -y copr disable avengemedia/danklinux
+systemctl enable greetd
+
+# Docker
+rpm --import https://download.docker.com/linux/fedora/gpg
+dnf5 config-manager addrepo --from-repofile=https://download.docker.com/linux/fedora/docker-ce.repo
+dnf5 install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
 
 # Use a COPR Example:
 #
