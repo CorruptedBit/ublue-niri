@@ -26,7 +26,7 @@ dnf5 -y copr disable avengemedia/danklinux
 systemctl enable greetd
 
 # File Manager
-dnf5 install -y thunar thunar-volman gvfs gvfs-mtp adw-gtk3
+dnf5 install -y thunar thunar-volman gvfs gvfs-mtp adw-gtk3-theme
 
 # Docker
 rpm --import https://download.docker.com/linux/fedora/gpg
